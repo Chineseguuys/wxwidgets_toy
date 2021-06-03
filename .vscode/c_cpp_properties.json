@@ -7,7 +7,8 @@
                 "${workspaceFolder}/list_control/include"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang"
+            "compilerPath": "/usr/bin/clang",
+            "compileCommands": "${workspaceFolder}/list_control/build/compile_commands.json"
         }
     ],
     "version": 4

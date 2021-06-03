@@ -17,9 +17,15 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
     /**
      * 使用一个 button 来查看这个排序的效果
     */
-
+    auto button = new wxButton(panel, wxID_ANY, "Sort by ID");
+    /**
+     * Bind() 绑定事件更加的灵活
+    */
+    button->Bind(wxEVT_BUTTON, &MyFrame::SortById, this);
+    
     auto sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(basicListView, 1, wxALL | wxEXPAND, 0);
+    sizer->Add(button, 0, wxALIGN_LEFT | wxTOP | wxBOTTOM | wxLEFT, 5);
     panel->SetSizerAndFit(sizer);
 
     this->populateListView();
@@ -41,11 +47,20 @@ void MyFrame::addSingleItem(int id, const std::string& name, const std::string& 
     this->basicListView->SetItem(index, 1, name);
     this->basicListView->SetItem(index, 2, destription);
 
+    /**
+     * 这里设置的值是每一行的数据的一个属性值，这个属性值非常的重要
+     * list 在进行排序的时候依赖的就是这个属性值
+    */
     this->basicListView->SetItemData(index, id);
 }
 
 void MyFrame::SortById(wxCommandEvent& e)
 {
+    /**
+     * 默认的排序算法会根据 SetItemData() 中设置的值的大小来进行排序。
+     * 下面的这个函数中第一个参数是一个函数句柄，这里直接使用 lambda 表达式。
+     * item1 和 item2 就是每一个 item 存储的值（即在 this->basicListView->SetItemData(index, id); 当中设置的 id 值）
+    */
     this->basicListView->SortItems(
         [](wxIntPtr item1, wxIntPtr item2, wxIntPtr direction) {
             if (item1 == item2) 
@@ -59,5 +74,9 @@ void MyFrame::SortById(wxCommandEvent& e)
     );
 
     this->basicListView->Refresh();
+    /**
+     * sortDirection 控制排序的方向，从大到小或者从小到达。
+     * 上一次排序是从大到小，那么这一次就要从小到达
+    */
     this->sortDirection = -this->sortDirection;
 }

@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "MakeFiles": "makefile",
-        "numeric": "cpp",
-        "*.tcc": "cpp",
-        "string": "cpp",
-        "iosfwd": "cpp"
-    }
-}

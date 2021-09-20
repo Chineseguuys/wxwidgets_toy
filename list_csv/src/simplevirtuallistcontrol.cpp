@@ -18,6 +18,7 @@ SimpleVirtualListControl::SimpleVirtualListControl(wxWindow *parent, const wxWin
 
     this->Bind(wxEVT_LIST_COL_CLICK, [this](wxListEvent &evt) {
         auto selectedListIndex = getFirstSelectedIndex();
+        std::cout << "GetNextItem() = " << selectedListIndex << std::endl;
         long selectedDataIndex;
 
         if (selectedListIndex != -1)
@@ -78,6 +79,10 @@ void SimpleVirtualListControl::setItems(std::vector<ItemData> itemsToSet)
     this->items = itemsToSet;
 
     this->orderedIndices = std::vector<long>(items.size());
+    /**
+     * 将数组的中 begin() 开始的位置到 end()为止的位置用一组数据进行填充。第三个参数表示填充的起始值
+     * 值的大小依次的增大。下面就是从 0 开始填充。
+    */
     std::iota(orderedIndices.begin(), orderedIndices.end(), 0);
 }
 

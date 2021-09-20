@@ -37,6 +37,7 @@ void MyFrame::populateListView()
     this->addSingleItem(123, "Some Item", "This is a item");
     this->addSingleItem(456, "Other Item", "This is a different item");
     this->addSingleItem(789, "Another Item", "This is a most different item");
+    this->addSingleItem(1213, "AAnother Item", "This is a most most different item");
 }
 
 void MyFrame::addSingleItem(int id, const std::string& name, const std::string& destription)
@@ -60,6 +61,10 @@ void MyFrame::SortById(wxCommandEvent& e)
      * 默认的排序算法会根据 SetItemData() 中设置的值的大小来进行排序。
      * 下面的这个函数中第一个参数是一个函数句柄，这里直接使用 lambda 表达式。
      * item1 和 item2 就是每一个 item 存储的值（即在 this->basicListView->SetItemData(index, id); 当中设置的 id 值）
+     * 
+     * typedef ssize_t wxIntPtr
+     * Signed and unsigned integral types big enough to contain all of long, size_t and void*.
+     * (The mapping is more complex than a simple typedef and is not shown here).
     */
     this->basicListView->SortItems(
         [](wxIntPtr item1, wxIntPtr item2, wxIntPtr direction) {

@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/build",
+  "command": "clang++   -I\"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/include\"   -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1 -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread   -o CMakeFiles/list_csv.dir/src/main.cpp.o -c \"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/main.cpp\"",
+  "file": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/main.cpp"
+},
+{
+  "directory": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/build",
+  "command": "clang++   -I\"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/include\"   -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1 -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread   -o CMakeFiles/list_csv.dir/src/myapp.cpp.o -c \"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/myapp.cpp\"",
+  "file": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/myapp.cpp"
+},
+{
+  "directory": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/build",
+  "command": "clang++   -I\"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/include\"   -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1 -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread   -o CMakeFiles/list_csv.dir/src/myframe.cpp.o -c \"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/myframe.cpp\"",
+  "file": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/myframe.cpp"
+},
+{
+  "directory": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/build",
+  "command": "clang++   -I\"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/include\"   -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1 -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread   -o CMakeFiles/list_csv.dir/src/simplevirtuallistcontrol.cpp.o -c \"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/simplevirtuallistcontrol.cpp\"",
+  "file": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/simplevirtuallistcontrol.cpp"
+}
+]

@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/itemdata.h
+string
+-
+istream
+-
+sstream
+-
+
+../include/simplevirtuallistcontrol.h
+wx/wx.h
+-
+wx/listctrl.h
+-
+itemdata.h
+../include/itemdata.h
+vector
+-
+numeric
+-
+
+/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/simplevirtuallistcontrol.cpp
+simplevirtuallistcontrol.h
+/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_csv/src/simplevirtuallistcontrol.h
+wx/listctrl.h
+-
+algorithm
+-
+

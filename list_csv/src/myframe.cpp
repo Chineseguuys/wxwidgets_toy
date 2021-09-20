@@ -17,6 +17,9 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 }
 
 std::vector<ItemData> MyFrame::readItemsFromCsv() {
+    /**
+     * 从文件读取所有数据
+    */
     std::ifstream the_stream{std::string(CSV_DIR) + "apple_1d.csv", std::ios::in};
 
     the_stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -25,6 +28,9 @@ std::vector<ItemData> MyFrame::readItemsFromCsv() {
 
     while (the_stream) 
     {
+        /**
+         * 一次读取一行的数据，存储在 数据结构 ItemData
+        */
         auto item = ItemData::fromCsvLine(the_stream);
         if (!item.date.empty())
         {

@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/cmake_build",
+  "command": "clang++   -I\"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/include\"   -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1 -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread   -o CMakeFiles/list_control.dir/src/main.cpp.o -c \"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/main.cpp\"",
+  "file": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/main.cpp"
+},
+{
+  "directory": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/cmake_build",
+  "command": "clang++   -I\"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/include\"   -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1 -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread   -o CMakeFiles/list_control.dir/src/myapp.cpp.o -c \"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/myapp.cpp\"",
+  "file": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/myapp.cpp"
+},
+{
+  "directory": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/cmake_build",
+  "command": "clang++   -I\"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/include\"   -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1 -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1 -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread   -o CMakeFiles/list_control.dir/src/myframe.cpp.o -c \"/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/myframe.cpp\"",
+  "file": "/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/myframe.cpp"
+}
+]

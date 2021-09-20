@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/myframe.h
+wx/wx.h
+-
+wx/listctrl.h
+-
+
+/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/myframe.cpp
+myframe.h
+/home/yjh/Nutstore Files/Github_storage/wx_widgets/list_control/src/myframe.h
+

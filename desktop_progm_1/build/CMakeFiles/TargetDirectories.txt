@@ -1,0 +1,3 @@
+/home/yjh/Nutstore Files/Github_storage/wx_widgets/desktop_progm_1/build/CMakeFiles/rebuild_cache.dir
+/home/yjh/Nutstore Files/Github_storage/wx_widgets/desktop_progm_1/build/CMakeFiles/edit_cache.dir
+/home/yjh/Nutstore Files/Github_storage/wx_widgets/desktop_progm_1/build/CMakeFiles/wx_widgets.dir

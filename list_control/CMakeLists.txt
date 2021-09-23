@@ -21,6 +21,8 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread")
 
 
+
+
 set (SOURCES 
     src/main.cpp 
     src/myapp.cpp 

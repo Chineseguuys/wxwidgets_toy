@@ -8,7 +8,7 @@
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
-            "compileCommands": "${workspaceFolder}/list_control/cmake_build/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/office_tutorials/notebook/build/compile_commands.json"
         }
     ],
     "version": 4

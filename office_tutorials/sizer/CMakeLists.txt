@@ -20,6 +20,9 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pth
 set (SOURCES
     frame.cpp
     app.cpp
+    mydialog.cpp
+    mystaticboxsizer.cpp
+    mygridsizer.cpp
 )
 
 add_executable( ${PROJECT_NAME}
@@ -70,4 +73,7 @@ target_link_libraries( ${PROJECT_NAME}
     gobject-2.0 
     glib-2.0 
     m
+# if using llvm c++ lib, should do 
+    c++
+    c++abi
 )

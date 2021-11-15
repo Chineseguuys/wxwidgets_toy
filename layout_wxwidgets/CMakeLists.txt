@@ -3,15 +3,18 @@ cmake_minimum_required(VERSION 3.16.3)
 project(layerout_wxwidgets)
 
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set (CMAKE_C_COMPILER "clang")
-set (CMAKE_CXX_COMPILER "clang++")
+set (CMAKE_C_COMPILER clang)
+set (CMAKE_CXX_COMPILER clang++)
 set (CMAKE_VERBOSE_MAKEFILE ON)
-set (WX_INCLUDE_DIR "/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1")
-set (WX_LIBRARY_DIR "/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib")
+
+# 在不同的电脑主机上，安装目录的位置有所不同。以实际情况为准
+# 下面的安装位置是编译安装的默认位置
+set (WX_INCLUDE_DIR "/usr/local/include/wx-3.1")
+set (WX_LIBRARY_DIR "/usr/local/lib")
 
 # 通过执行 wx-config --cxxflags 获得
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_LIBRARY_DIR}/wx/include/gtk3-unicode-3.1")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_INCLUDE_DIR}")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread")
 
 set (SOURCES 
@@ -35,17 +38,13 @@ target_include_directories( ${PROJECT_NAME}
 
 # 需要的库通过 wx-config --libs 获得
 target_link_libraries( ${PROJECT_NAME}
-    ${WX_LIBRARY_DIR}/libwx_gtk3u_xrc-3.1.a
-    ${WX_LIBRARY_DIR}/libwx_gtk3u_qa-3.1.a
-    ${WX_LIBRARY_DIR}/libwx_baseu_net-3.1.a
-    ${WX_LIBRARY_DIR}/libwx_gtk3u_html-3.1.a
-    ${WX_LIBRARY_DIR}/libwx_gtk3u_core-3.1.a
-    ${WX_LIBRARY_DIR}/libwx_baseu_xml-3.1.a
-    ${WX_LIBRARY_DIR}/libwx_baseu-3.1.a
-    ${WX_LIBRARY_DIR}/libwxtiff-3.1.a
-    ${WX_LIBRARY_DIR}/libwxjpeg-3.1.a
-    ${WX_LIBRARY_DIR}/libwxregexu-3.1.a
-    ${WX_LIBRARY_DIR}/libwxscintilla-3.1.a
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_xrc-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_html-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_qa-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_core-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_baseu_xml-3.1.so 
+    ${WX_LIBRARY_DIR}/libwx_baseu_net-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_baseu-3.1.so
     gthread-2.0
     X11
     SM
@@ -65,8 +64,8 @@ target_link_libraries( ${PROJECT_NAME}
     expat 
     png 
     z 
-    dl 
-    secret-1 
+    dl
+    secret-1  
     gio-2.0 
     gobject-2.0 
     glib-2.0 

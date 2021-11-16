@@ -10,6 +10,7 @@ public:
     void OnButtonOK(wxCommandEvent& evt);
     void OnStaticBoxSizer(wxCommandEvent &evt);
     void OnGridSizer(wxCommandEvent &evt);
+    void OnFlexGridSizer(wxCommandEvent &evt);
 
   private:
     DECLARE_EVENT_TABLE()

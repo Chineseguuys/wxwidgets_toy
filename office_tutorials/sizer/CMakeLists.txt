@@ -23,6 +23,7 @@ set (SOURCES
     mydialog.cpp
     mystaticboxsizer.cpp
     mygridsizer.cpp
+    myflexgridsizer.cpp
 )
 
 add_executable( ${PROJECT_NAME}

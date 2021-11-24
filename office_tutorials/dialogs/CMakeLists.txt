@@ -21,10 +21,6 @@ set (SOURCES
     frame.cpp
     app.cpp
     mydialog.cpp
-    mystaticboxsizer.cpp
-    mygridsizer.cpp
-    myflexgridsizer.cpp
-    mygridbagsizer.cpp
 )
 
 add_executable( ${PROJECT_NAME}
@@ -34,6 +30,8 @@ add_executable( ${PROJECT_NAME}
 target_include_directories( ${PROJECT_NAME}
     PUBLIC
         ${WX_INCLUDE_DIR}
+        ${PROJECT_SOURCE_DIR}/include 
+        ${PROJECT_SOURCE_DIR}/icons
 )
 
 # 需要为 wx widgets 准备的所有的链接库文件

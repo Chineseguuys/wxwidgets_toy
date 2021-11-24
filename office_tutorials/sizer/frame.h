@@ -11,7 +11,9 @@ public:
     void OnStaticBoxSizer(wxCommandEvent &evt);
     void OnGridSizer(wxCommandEvent &evt);
     void OnFlexGridSizer(wxCommandEvent &evt);
+    void OnGridBagSizer(wxCommandEvent &evt);
 
-  private:
+
+private:
     DECLARE_EVENT_TABLE()
 };

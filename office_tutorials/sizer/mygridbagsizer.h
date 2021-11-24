@@ -2,6 +2,7 @@
 #define _MY_GRIDBAGSIZER_H_
 
 #include <wx/wx.h>
+#include <wx/gbsizer.h>
 
 class MyGridBagSizer : public wxDialog {
 public:

@@ -20,7 +20,6 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pth
 set (SOURCES
     frame.cpp
     app.cpp
-    mytypes.cpp
 )
 
 add_executable( ${PROJECT_NAME}
@@ -76,6 +75,4 @@ target_link_libraries( ${PROJECT_NAME}
 # if using llvm c++ lib, should do 
     c++
     c++abi
-# if using self defined logs added this dynamic link library
-    simplelogs
 )

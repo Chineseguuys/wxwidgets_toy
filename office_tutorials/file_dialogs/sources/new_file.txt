@@ -1,0 +1,2 @@
+17:02:29.748425 WARN  /home/yjh/work/github_storage/wx_widgets/office_tutorials/file_dialogs/frame.cpp:53: file name is empty, need path and name
+17:03:02.485543 INFO  /home/yjh/work/github_storage/wx_widgets/office_tutorials/file_dialogs/frame.cpp:64: save file with given name new_file.txt, in path /home/yjh/work/github_storage/wx_widgets/office_tutorials/file_dialogs/sources/new_file.txt

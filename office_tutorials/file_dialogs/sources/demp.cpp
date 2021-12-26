@@ -8,13 +8,15 @@ extern "C" {
 
 /* https://wiki.wxwidgets.org/Writing_Your_First_Application-Using_The_WxTextCtrl */
 
+// 为 open file 按钮指定的事件 ID
+#define wxID_OPEN_FILE_DIALOG 6001
+
 BEGIN_EVENT_TABLE(MyFrame, wxFrame)
 EVT_MENU(wxID_EXIT, MyFrame::OnQuit)
-EVT_MENU(MENU_Open, MyFrame::OnOpenFile)
+EVT_MENU(wxID_OPEN_FILE_DIALOG, MyFrame::OnOpenFile)
 EVT_MENU(MENU_New, MyFrame::Newfile)
 EVT_MENU(MENU_Close, MyFrame::Closefile)
 EVT_MENU(MENU_Save, MyFrame::Savefile)
-EVT_MENU(MENU_SaveAs, MyFrame::SavefileAs)
 END_EVENT_TABLE()
 
 void MyFrame::OnQuit(wxCommandEvent &event) {
@@ -23,32 +25,6 @@ void MyFrame::OnQuit(wxCommandEvent &event) {
 }
 
 void MyFrame::Newfile(wxCommandEvent &WXUNUSED(evt)) {
-    if (this->main_edit_box->IsModified()) {
-        wxMessageDialog saveorNot(NULL, wxT("save"), wxT("Save it or not?"), wxNO_DEFAULT | wxYES_NO);
-        switch (saveorNot.ShowModal()) {
-        case wxID_YES: {
-            if (this->file_name.IsEmpty()) {
-                wxFileDialog savefileDialog(this, ("save as txt file"), "./", "",
-                                            "text files (*.txt)|*.txt",
-                                            wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-
-                if (savefileDialog.ShowModal() == wxID_CANCEL) {
-                    // do nothing
-                } else {
-                    wxString file_path_local = savefileDialog.GetPath();
-                    this->main_edit_box->SaveFile(file_path_local);
-                }
-            } else {
-                this->main_edit_box->SaveFile(this->file_path);
-                this->main_edit_box->Clear();
-            }
-        } break;
-        default: break;
-        }
-    }
-    this->file_name = wxEmptyString;
-    this->file_path = wxEmptyString;
-    this->main_edit_box->Clear();
 }
 
 void MyFrame::Closefile(wxCommandEvent &evt) {
@@ -76,42 +52,7 @@ void MyFrame::Closefile(wxCommandEvent &evt) {
 }
 
 void MyFrame::Savefile(wxCommandEvent &evt) {
-    if (this->file_name.IsEmpty()) {
-        log_warn("file name is empty, need path and name");
-        wxFileDialog saveFileDialog(this, ("Save text file"), "./", "", "text files (*.txt)|*.txt", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-
-        if (saveFileDialog.ShowModal() == wxID_CANCEL) {
-            log_info("user changed idea, not save file");
-            return;
-        }
-        this->file_name = saveFileDialog.GetFilename();
-        this->file_path = saveFileDialog.GetPath();
-        log_info("save file with given name %s, in path %s",
-                 static_cast<const char *>(this->file_name.mb_str(wxConvUTF8)),
-                 static_cast<const char *>(this->file_path.mb_str(wxConvUTF8)));
-
-        this->main_edit_box->SaveFile(this->file_path);
-    } else {
-        log_info("save file with name %s, in path %s",
-                 static_cast<const char *>(this->file_name.mb_str(wxConvUTF8)),
-                 static_cast<const char *>(this->file_path.mb_str(wxConvUTF8)));
-        this->main_edit_box->SaveFile(this->file_path);
-    }
-}
-
-void MyFrame::SavefileAs(wxCommandEvent &evt) {
-    wxFileDialog saveAsDialog(this, ("Save as txt file"), "./", "",
-                              "text file (*.txt)|*.txt",
-                              wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-    if (saveAsDialog.ShowModal() == wxID_CANCEL) {
-        log_info("user cancel save as");
-        return;
-    }
-    this->file_name = saveAsDialog.GetFilename();
-    this->file_path = saveAsDialog.GetPath();
-    log_info("save file as name %s, in path %s",
-             static_cast<const char *>(this->file_name.mb_str(wxConvUTF8)),
-             static_cast<const char *>(this->file_path.mb_str(wxConvUTF8)));
+    log_info("save file with name : %s", static_cast<const char *>(this->file_path.mb_str(wxConvUTF8)));
     this->main_edit_box->SaveFile(this->file_path);
 }
 
@@ -147,17 +88,16 @@ void MyFrame::OnOpenFile(wxCommandEvent &evt) {
  * @param 主窗口的名称
  */
 MyFrame::MyFrame(const wxString &title) :
-    wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(700, 500)) {
+    wxFrame(NULL, wxID_ANY, title) {
     wxMenu *fileMenu = new wxMenu;
     wxMenu *helpMenu = new wxMenu;
 
     fileMenu->Append(wxID_EXIT, wxT("&Exit\tAlt-X"), wxT("Quit this program"));
-    fileMenu->Append(MENU_Open, wxT("&Open\tAlt-O"),
+    fileMenu->Append(wxID_OPEN_FILE_DIALOG, wxT("&Open\tAlt-O"),
                      wxT("Open file"));
     fileMenu->Append(MENU_New, wxT("&New"), wxT("Create a new file"));
     fileMenu->Append(MENU_Close, wxT("&close"), wxT("Close file"));
     fileMenu->Append(MENU_Save, wxT("&Save"), wxT("Save file"));
-    fileMenu->Append(MENU_SaveAs, wxT("&SaveAs"), wxT("Save file with other location"));
 
     // Now append the freshly created menu to the menu bar...
     wxMenuBar *menuBar = new wxMenuBar();
@@ -167,7 +107,7 @@ MyFrame::MyFrame(const wxString &title) :
     SetMenuBar(menuBar);
 
     this->main_edit_box = new wxTextCtrl(
-        this, TEXT_Main, wxEmptyString,
+        this, TEXT_Main, wxT("Please Open a File, or Create a New File!"),
         wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE | wxTE_RICH,
         wxDefaultValidator, wxTextCtrlNameStr);
 

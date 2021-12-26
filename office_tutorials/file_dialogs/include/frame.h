@@ -7,17 +7,22 @@
 
 class MyFrame : public wxFrame {
 public:
-    MyFrame (const wxString& title);
+    MyFrame(const wxString &title);
 
-    void OnQuit(wxCommandEvent& evt);
+private:
+    void Newfile(wxCommandEvent &evt);
+    void Closefile(wxCommandEvent &evt);
+    void Savefile(wxCommandEvent &evt);
+    void SavefileAs(wxCommandEvent &evt);
+    void OnQuit(wxCommandEvent &evt);
     void OnOpenFile(wxCommandEvent &evt);
 
 private:
-    wxString file_path;
-    wxString file_name;
+    wxString    file_path;
+    wxString    file_name;
     wxTextCtrl *main_edit_box;
 
-  private:
+private:
     DECLARE_EVENT_TABLE()
 };
 

@@ -17,10 +17,9 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_LIBRARY_DIR}/wx/include/gtk3-uni
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_INCLUDE_DIR}")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread")
 
-set (SOURCES
-    frame.cpp
-    app.cpp
-    mytypes.cpp
+set (SOURCES 
+    src/cMain.cpp
+    src/cApp.cpp
 )
 
 add_executable( ${PROJECT_NAME}
@@ -31,7 +30,6 @@ target_include_directories( ${PROJECT_NAME}
     PUBLIC
         ${WX_INCLUDE_DIR}
         ${PROJECT_SOURCE_DIR}/include 
-        ${PROJECT_SOURCE_DIR}/icons
 )
 
 # 需要为 wx widgets 准备的所有的链接库文件

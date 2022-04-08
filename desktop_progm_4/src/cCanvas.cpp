@@ -10,7 +10,7 @@ wxEND_EVENT_TABLE()
 
 cCanvas::cCanvas(wxWindow *parent) : wxHVScrolledWindow(parent, wxID_ANY) {
     SetRowColumnCount(40, 40);
-    SetBackgroundStyle(wxBG_STYLE_PAINT);
+    //SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 cCanvas::~cCanvas() {}

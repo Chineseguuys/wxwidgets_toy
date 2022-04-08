@@ -10,7 +10,7 @@
             ],
             "defines": [],
             "compilerPath": "/usr/local/bin/clang",
-            "compileCommands": "${workspaceFolder}/base_change_ui/build/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/desktop_progm_4/build/compile_commands.json"
         }
     ],
     "version": 4

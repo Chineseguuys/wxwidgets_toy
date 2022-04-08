@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(list_csv)
+project(wx_widgets)
 
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set (CMAKE_C_COMPILER "clang")
-set (CMAKE_CXX_COMPILER "clang++")
+set (CMAKE_C_COMPILER clang)
+set (CMAKE_CXX_COMPILER clang++)
 set (CMAKE_VERBOSE_MAKEFILE ON)
 
 # 在不同的电脑主机上，安装目录的位置有所不同。以实际情况为准
@@ -17,22 +17,33 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_LIBRARY_DIR}/wx/include/gtk3-uni
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_INCLUDE_DIR}")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread -g")
 
-
-set (SOURCES 
-    src/main.cpp 
-    src/myapp.cpp 
-    src/myframe.cpp
-    src/simplevirtuallistcontrol.cpp
+set (SOURCES
+    src/frame.cpp
+    src/app.cpp
+    src/piple.cpp
 )
+
+#add_library(looper STATIC
+#    src/ILooper.cpp
+#    src/Thread.cpp
+#    src/ILooperRoster.cpp
+#    src/IHandler.cpp
+#)
+
+#target_include_directories(looper
+#    PUBLIC
+#    ${PROJECT_SOURCE_DIR}/include
+#)
 
 add_executable( ${PROJECT_NAME}
     ${SOURCES}
 )
 
-target_include_directories( ${PROJECT_NAME} 
-    PUBLIC 
-        ${PROJECT_SOURCE_DIR}/include
-        ${WXWIDGET_INCLUDE_DIRS}
+target_include_directories( ${PROJECT_NAME}
+    PUBLIC
+        ${WX_INCLUDE_DIR}
+        ${PROJECT_SOURCE_DIR}/include 
+        ${PROJECT_SOURCE_DIR}/resources
 )
 
 # 需要为 wx widgets 准备的所有的链接库文件

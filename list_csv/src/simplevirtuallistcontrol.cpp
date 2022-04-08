@@ -2,9 +2,8 @@
 #include <wx/listctrl.h>
 #include <algorithm>
 
-SimpleVirtualListControl::SimpleVirtualListControl(wxWindow *parent, const wxWindowID id, const wxPoint &pos, const wxSize &size)
-    : wxListCtrl(parent, id, pos, size, wxLC_REPORT | wxLC_VIRTUAL)
-{
+SimpleVirtualListControl::SimpleVirtualListControl(wxWindow *parent, const wxWindowID id, const wxPoint &pos, const wxSize &size) :
+    wxListCtrl(parent, id, pos, size, wxLC_REPORT | wxLC_VIRTUAL) {
     this->AppendColumn("Date");
     this->AppendColumn("Low");
     this->AppendColumn("High");
@@ -21,8 +20,7 @@ SimpleVirtualListControl::SimpleVirtualListControl(wxWindow *parent, const wxWin
         std::cout << "GetNextItem() = " << selectedListIndex << std::endl;
         long selectedDataIndex;
 
-        if (selectedListIndex != -1)
-        {
+        if (selectedListIndex != -1) {
             selectedDataIndex = this->orderedIndices[selectedListIndex];
 
             // deselecting old index
@@ -32,8 +30,7 @@ SimpleVirtualListControl::SimpleVirtualListControl(wxWindow *parent, const wxWin
         this->sortByColumn(evt.GetColumn());
         this->RefreshAfterUpdate();
 
-        if (selectedListIndex != -1)
-        {
+        if (selectedListIndex != -1) {
             auto listIndexToSelect = findIndexOfDataIndex(selectedDataIndex);
             this->SetItemState(listIndexToSelect, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);
             this->EnsureVisible(listIndexToSelect);
@@ -43,12 +40,10 @@ SimpleVirtualListControl::SimpleVirtualListControl(wxWindow *parent, const wxWin
     });
 }
 
-wxString SimpleVirtualListControl::OnGetItemText(long index, long column) const
-{
+wxString SimpleVirtualListControl::OnGetItemText(long index, long column) const {
     ItemData item = items[orderedIndices[index]];
 
-    switch (column)
-    {
+    switch (column) {
     case 0:
         return item.date;
     case 1:
@@ -68,21 +63,19 @@ wxString SimpleVirtualListControl::OnGetItemText(long index, long column) const
     }
 }
 
-void SimpleVirtualListControl::RefreshAfterUpdate()
-{
+void SimpleVirtualListControl::RefreshAfterUpdate() {
     this->SetItemCount(orderedIndices.size());
     this->Refresh();
 }
 
-void SimpleVirtualListControl::setItems(std::vector<ItemData> itemsToSet)
-{
+void SimpleVirtualListControl::setItems(std::vector<ItemData> itemsToSet) {
     this->items = itemsToSet;
 
     this->orderedIndices = std::vector<long>(items.size());
     /**
      * 将数组的中 begin() 开始的位置到 end()为止的位置用一组数据进行填充。第三个参数表示填充的起始值
      * 值的大小依次的增大。下面就是从 0 开始填充。
-    */
+     */
     std::iota(orderedIndices.begin(), orderedIndices.end(), 0);
 }
 
@@ -98,8 +91,7 @@ void SimpleVirtualListControl::sortByColumn(int column) {
         auto i1 = this->items[index1];
         auto i2 = this->items[index2];
 
-        switch (column)
-        {
+        switch (column) {
         case 0:
             return genericCompare(i1.date, i2.date, ascending);
         case 1:
@@ -120,12 +112,10 @@ void SimpleVirtualListControl::sortByColumn(int column) {
     });
 }
 
-long SimpleVirtualListControl::getFirstSelectedIndex()
-{
+long SimpleVirtualListControl::getFirstSelectedIndex() {
     return GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
 }
 
-long SimpleVirtualListControl::findIndexOfDataIndex(long dataIndex)
-{
+long SimpleVirtualListControl::findIndexOfDataIndex(long dataIndex) {
     return std::find(orderedIndices.begin(), orderedIndices.end(), dataIndex) - orderedIndices.begin();
 }

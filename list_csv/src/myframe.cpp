@@ -5,13 +5,12 @@
 #define CSV_DIR "./data/"
 #endif
 
-MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
-    : wxFrame(nullptr, wxID_ANY, title, pos, size), 
-    useVirtual(true), 
-    virtualListView(nullptr), 
-    plainListView(nullptr), 
-    switchButton(nullptr)
-{
+MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) :
+    wxFrame(nullptr, wxID_ANY, title, pos, size),
+    useVirtual(true),
+    virtualListView(nullptr),
+    plainListView(nullptr),
+    switchButton(nullptr) {
     this->items = readItemsFromCsv();
     this->setupLayout();
 }
@@ -19,21 +18,19 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 std::vector<ItemData> MyFrame::readItemsFromCsv() {
     /**
      * 从文件读取所有数据
-    */
+     */
     std::ifstream the_stream{std::string(CSV_DIR) + "apple_1d.csv", std::ios::in};
 
     the_stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    
+
     std::vector<ItemData> items;
 
-    while (the_stream) 
-    {
+    while (the_stream) {
         /**
          * 一次读取一行的数据，存储在 数据结构 ItemData
-        */
+         */
         auto item = ItemData::fromCsvLine(the_stream);
-        if (!item.date.empty())
-        {
+        if (!item.date.empty()) {
             items.push_back(item);
         }
     }
@@ -41,17 +38,15 @@ std::vector<ItemData> MyFrame::readItemsFromCsv() {
     return items;
 }
 
-void MyFrame::populateVirtualListView()
-{
+void MyFrame::populateVirtualListView() {
     virtualListView->setItems(items);
     virtualListView->RefreshAfterUpdate();
 }
 
 void MyFrame::populatePlainListView() {
-    for (int i = 0; i < items.size(); i++)
-    {
-        const auto& item = items[i];
-        int insertionPoint = plainListView->GetItemCount();
+    for (int i = 0; i < items.size(); i++) {
+        const auto &item = items[i];
+        int         insertionPoint = plainListView->GetItemCount();
 
         plainListView->InsertItem(insertionPoint, item.date);
         plainListView->SetItem(insertionPoint, 1, wxString::Format("%.2f", item.low));
@@ -63,19 +58,15 @@ void MyFrame::populatePlainListView() {
     }
 }
 
-void MyFrame::setupLayout()
-{
+void MyFrame::setupLayout() {
     std::string buttonLabel = "Re-create as a plain ListView";
 
-    if (switchButton != nullptr)
-    {
+    if (switchButton != nullptr) {
         switchButton->Destroy();
         switchButton = nullptr;
     }
-    if (useVirtual)
-    {
-        if (plainListView != nullptr)
-        {
+    if (useVirtual) {
+        if (plainListView != nullptr) {
             plainListView->Destroy();
             plainListView = nullptr;
         }
@@ -84,11 +75,8 @@ void MyFrame::setupLayout()
         wxStopWatch sw;
         populateVirtualListView();
         std::cout << "Populating virtual list view took " << sw.Time() << "ms." << std::endl;
-    }
-    else
-    {
-        if (virtualListView != nullptr)
-        {
+    } else {
+        if (virtualListView != nullptr) {
             virtualListView->Destroy();
             virtualListView = nullptr;
         }
@@ -114,8 +102,7 @@ void MyFrame::setupLayout()
     this->Layout();
 }
 
-void MyFrame::addPlainList()
-{
+void MyFrame::addPlainList() {
     plainListView = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxSize(800, 500), wxLC_REPORT);
 
     plainListView->AppendColumn("Date");
@@ -130,7 +117,6 @@ void MyFrame::addPlainList()
     plainListView->SetColumnWidth(5, 100);
 }
 
-void MyFrame::addVirtualList()
-{
+void MyFrame::addVirtualList() {
     virtualListView = new SimpleVirtualListControl(this, wxID_ANY, wxDefaultPosition, wxSize(800, 500));
 }

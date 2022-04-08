@@ -1,139 +1,136 @@
 #include <wx/wx.h>
 #include <wx/listctrl.h>
 
-#define _SENCE_2_
+#define _SENCE_1_
 
 class MyApp : public wxApp {
 public:
-	virtual bool OnInit();
+    virtual bool OnInit();
 };
 
-
-wxIMPLEMENT_APP(MyApp); // 在这里构建 main() 
+wxIMPLEMENT_APP(MyApp); // 在这里构建 main()
 
 class MyFrame : public wxFrame {
 public:
-	MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
+    MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 };
 
-
 bool MyApp::OnInit() {
-	MyFrame *frame = new MyFrame("Layout Example", wxDefaultPosition, wxDefaultSize);
-	frame->Show(true);
-	return  true;
+    MyFrame *frame = new MyFrame("Layout Example", wxDefaultPosition, wxDefaultSize);
+    frame->Show(true);
+    return true;
 }
 
 #ifdef _SENCE_1_
 
-MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
-	: wxFrame(nullptr, wxID_ANY, title, pos, size) {
-	/*
-	 这里 new 出来的对象并不需要手动的去进行 delete ,因为所有的子窗口的资源都是父窗口来进行管理的，父窗口在
-	 进行析构的时候，会自动的释放所有的资源
-	*/
-	wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200,100));
-	wxPanel *panel_buttom = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
-	wxPanel *panel_buttom_right = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
+MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) :
+    wxFrame(nullptr, wxID_ANY, title, pos, size) {
+    /*
+     这里 new 出来的对象并不需要手动的去进行 delete ,因为所有的子窗口的资源都是父窗口来进行管理的，父窗口在
+     进行析构的时候，会自动的释放所有的资源
+    */
+    wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
+    wxPanel *panel_buttom = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
+    wxPanel *panel_buttom_right = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
 
-	panel_top->SetBackgroundColour(wxColour(100, 100, 200));
-	panel_buttom->SetBackgroundColour(wxColour(100, 200, 100));
-	panel_buttom_right->SetBackgroundColour(wxColour(200, 100, 100));
+    panel_top->SetBackgroundColour(wxColour(100, 100, 200));
+    panel_buttom->SetBackgroundColour(wxColour(100, 200, 100));
+    panel_buttom_right->SetBackgroundColour(wxColour(200, 100, 100));
 
-	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);	// 垂直方向的 sizer 
-	// 组件加入到 sizer 当中的时候，按照从上到下的顺序进行排列
-	wxBoxSizer *sizer_buttom = new wxBoxSizer(wxHORIZONTAL);  // 水平方向的 sizer
-	// 组件加入到 sizer 当中的时候，按照从左到右的顺序进行排列
+    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL); // 垂直方向的 sizer
+    // 组件加入到 sizer 当中的时候，按照从上到下的顺序进行排列
+    wxBoxSizer *sizer_buttom = new wxBoxSizer(wxHORIZONTAL); // 水平方向的 sizer
+    // 组件加入到 sizer 当中的时候，按照从左到右的顺序进行排列
 
-	//sizer->Add(panel, 0);	// 参数0表示，panel 不会随着 sizer 的变化而变化
-	//sizer->Add(panel, 1);	// 在垂直的方向上， panel 会随着 sizer 的变化而变化
-	//sizer->Add(panel, 0, wxEXPAND); // 在水平方向上随着 sizer 的变化而变化
-	//sizer->Add(panel, 1, wxEXPAND); // 水平和垂直的方向上都会变化
-	//sizer->Add(panel, 0, wxEXPAND | wxALL); // 在水平方向上随着 sizer 的变化而变化
-	//sizer->Add(panel_top, 1, wxEXPAND | wxALL, 10); // panel 的四个边上面都有 5像素的边框
-	//sizer->Add(panel_buttom, 2, wxEXPAND | wxALL, 10);
-	//sizer->Add(panel, 1, wxEXPAND | wxLEFT, 5); //  只在左边有边框
-	//sizer->Add(panel, 0, wxEXPAND | wxALL, 5); 
-	// 在水平方向上随着 sizer 的变化而变化, panel 的四个边上面都有 5像素的边框
+    // sizer->Add(panel, 0);	// 参数0表示，panel 不会随着 sizer 的变化而变化
+    // sizer->Add(panel, 1);	// 在垂直的方向上， panel 会随着 sizer 的变化而变化
+    // sizer->Add(panel, 0, wxEXPAND); // 在水平方向上随着 sizer 的变化而变化
+    // sizer->Add(panel, 1, wxEXPAND); // 水平和垂直的方向上都会变化
+    // sizer->Add(panel, 0, wxEXPAND | wxALL); // 在水平方向上随着 sizer 的变化而变化
+    // sizer->Add(panel_top, 1, wxEXPAND | wxALL, 10); // panel 的四个边上面都有 5像素的边框
+    // sizer->Add(panel_buttom, 2, wxEXPAND | wxALL, 10);
+    // sizer->Add(panel, 1, wxEXPAND | wxLEFT, 5); //  只在左边有边框
+    // sizer->Add(panel, 0, wxEXPAND | wxALL, 5);
+    //  在水平方向上随着 sizer 的变化而变化, panel 的四个边上面都有 5像素的边框
 
-	sizer_buttom->Add(panel_buttom, 1, wxEXPAND | wxRIGHT, 5);
-	sizer_buttom->Add(panel_buttom_right, 2, wxEXPAND | wxALL, 0);
+    sizer_buttom->Add(panel_buttom, 1, wxEXPAND | wxRIGHT, 5);
+    sizer_buttom->Add(panel_buttom_right, 2, wxEXPAND | wxALL, 0);
 
-	sizer->Add(panel_top, 1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 5);
-	sizer->Add(sizer_buttom, 1, wxEXPAND | wxALL, 5);
+    sizer->Add(panel_top, 1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 5);
+    sizer->Add(sizer_buttom, 1, wxEXPAND | wxALL, 5);
 
-	this->SetSizerAndFit(sizer);
+    this->SetSizerAndFit(sizer);
 }
-	
+
 #endif
 
 #ifdef _SENCE_2_
 
-MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
-	: wxFrame(nullptr, wxID_ANY, title, pos, size) {
-	/*
-	 这里 new 出来的对象并不需要手动的去进行 delete ,因为所有的子窗口的资源都是父窗口来进行管理的，父窗口在
-	 进行析构的时候，会自动的释放所有的资源
-	*/
-	wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200,100));
-	wxPanel *panel_buttom = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
-	wxPanel *panel_buttom_right = new wxPanel(panel_buttom, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
+MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) :
+    wxFrame(nullptr, wxID_ANY, title, pos, size) {
+    /*
+     这里 new 出来的对象并不需要手动的去进行 delete ,因为所有的子窗口的资源都是父窗口来进行管理的，父窗口在
+     进行析构的时候，会自动的释放所有的资源
+    */
+    wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
+    wxPanel *panel_buttom = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
+    wxPanel *panel_buttom_right = new wxPanel(panel_buttom, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
 
-	panel_top->SetBackgroundColour(wxColour(100, 100, 200));
-	panel_buttom->SetBackgroundColour(wxColour(100, 200, 100));
-	panel_buttom_right->SetBackgroundColour(wxColour(200, 100, 100));
+    panel_top->SetBackgroundColour(wxColour(100, 100, 200));
+    panel_buttom->SetBackgroundColour(wxColour(100, 200, 100));
+    panel_buttom_right->SetBackgroundColour(wxColour(200, 100, 100));
 
-	wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);	// 垂直方向的 sizer 
-	// 组件加入到 sizer 当中的时候，按照从上到下的顺序进行排列
-	wxBoxSizer *sizer_buttom = new wxBoxSizer(wxHORIZONTAL);  // 水平方向的 sizer
-	// 组件加入到 sizer 当中的时候，按照从左到右的顺序进行排列
+    wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL); // 垂直方向的 sizer
+    // 组件加入到 sizer 当中的时候，按照从上到下的顺序进行排列
+    wxBoxSizer *sizer_buttom = new wxBoxSizer(wxHORIZONTAL); // 水平方向的 sizer
+    // 组件加入到 sizer 当中的时候，按照从左到右的顺序进行排列
 
-	//sizer->Add(panel, 0);	// 参数0表示，panel 不会随着 sizer 的变化而变化
-	//sizer->Add(panel, 1);	// 在垂直的方向上， panel 会随着 sizer 的变化而变化
-	//sizer->Add(panel, 0, wxEXPAND); // 在水平方向上随着 sizer 的变化而变化
-	//sizer->Add(panel, 1, wxEXPAND); // 水平和垂直的方向上都会变化
-	//sizer->Add(panel, 0, wxEXPAND | wxALL); // 在水平方向上随着 sizer 的变化而变化
-	//sizer->Add(panel_top, 1, wxEXPAND | wxALL, 10); // panel 的四个边上面都有 5像素的边框
-	//sizer->Add(panel_buttom, 2, wxEXPAND | wxALL, 10);
-	//sizer->Add(panel, 1, wxEXPAND | wxLEFT, 5); //  只在左边有边框
-	//sizer->Add(panel, 0, wxEXPAND | wxALL, 5); 
-	// 在水平方向上随着 sizer 的变化而变化, panel 的四个边上面都有 5像素的边框
+    // sizer->Add(panel, 0);	// 参数0表示，panel 不会随着 sizer 的变化而变化
+    // sizer->Add(panel, 1);	// 在垂直的方向上， panel 会随着 sizer 的变化而变化
+    // sizer->Add(panel, 0, wxEXPAND); // 在水平方向上随着 sizer 的变化而变化
+    // sizer->Add(panel, 1, wxEXPAND); // 水平和垂直的方向上都会变化
+    // sizer->Add(panel, 0, wxEXPAND | wxALL); // 在水平方向上随着 sizer 的变化而变化
+    // sizer->Add(panel_top, 1, wxEXPAND | wxALL, 10); // panel 的四个边上面都有 5像素的边框
+    // sizer->Add(panel_buttom, 2, wxEXPAND | wxALL, 10);
+    // sizer->Add(panel, 1, wxEXPAND | wxLEFT, 5); //  只在左边有边框
+    // sizer->Add(panel, 0, wxEXPAND | wxALL, 5);
+    //  在水平方向上随着 sizer 的变化而变化, panel 的四个边上面都有 5像素的边框
 
-	//sizer_buttom->Add(panel_buttom_right, 1, wxEXPAND | wxALL, 5);
-	sizer_buttom->Add(panel_buttom_right, 1, wxALIGN_BOTTOM | wxALL, 5);
-	// 无论 sizer_buttom 的形状如何的变化， panel_buttom_right 都紧靠 sizer_buttom 的底部
+    // sizer_buttom->Add(panel_buttom_right, 1, wxEXPAND | wxALL, 5);
+    sizer_buttom->Add(panel_buttom_right, 1, wxALIGN_BOTTOM | wxALL, 5);
+    // 无论 sizer_buttom 的形状如何的变化， panel_buttom_right 都紧靠 sizer_buttom 的底部
 
-	sizer->Add(panel_top, 1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 5);
-	sizer->Add(panel_buttom, 1, wxEXPAND | wxALL, 5);
+    sizer->Add(panel_top, 1, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 5);
+    sizer->Add(panel_buttom, 1, wxEXPAND | wxALL, 5);
 
-	panel_buttom->SetSizerAndFit(sizer_buttom);
+    panel_buttom->SetSizerAndFit(sizer_buttom);
 
-	this->SetSizerAndFit(sizer);
+    this->SetSizerAndFit(sizer);
 }
 
 #endif
 
 #ifdef _SENCE_3_
 
-MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
-	: wxFrame(nullptr, wxID_ANY, title, pos, size) {
-	
-	wxListView *list = new wxListView(this, wxID_ANY, wxDefaultPosition, wxSize(300, 200));
-	list->InsertColumn(0, "Name");
-	list->InsertItem(0, "Item");
+MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) :
+    wxFrame(nullptr, wxID_ANY, title, pos, size) {
+    wxListView *list = new wxListView(this, wxID_ANY, wxDefaultPosition, wxSize(300, 200));
+    list->InsertColumn(0, "Name");
+    list->InsertItem(0, "Item");
 
-	wxButton *ok_button = new wxButton(this, wxID_ANY, "ok");
-	wxButton *cancel_button = new wxButton(this, wxID_ANY, "cancel");
+    wxButton *ok_button = new wxButton(this, wxID_ANY, "ok");
+    wxButton *cancel_button = new wxButton(this, wxID_ANY, "cancel");
 
-	wxBoxSizer *s1 = new wxBoxSizer(wxVERTICAL);
-	wxBoxSizer *s2 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *s1 = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer *s2 = new wxBoxSizer(wxHORIZONTAL);
 
-	s1->Add(list, 1, wxEXPAND | wxALL, 5);
-	s2->Add(ok_button, 0, wxRIGHT, 5);
-	s2->Add(cancel_button, 0);
+    s1->Add(list, 1, wxEXPAND | wxALL, 5);
+    s2->Add(ok_button, 0, wxRIGHT, 5);
+    s2->Add(cancel_button, 0);
 
-	s1->Add(s2, 0, wxALIGN_RIGHT | wxRIGHT | wxBOTTOM, 5);
+    s1->Add(s2, 0, wxALIGN_RIGHT | wxRIGHT | wxBOTTOM, 5);
 
-	this->SetSizerAndFit(s1);
+    this->SetSizerAndFit(s1);
 }
 
 #endif

@@ -48,6 +48,7 @@ cMain::cMain() : wxMDIParentFrame(nullptr, wxID_ANY, "One Windows", wxPoint(30, 
         m_ToolBar->AddControl(b);   //将按钮添加到 toolbar 当中
     }
     wxButton *b = new wxButton(m_ToolBar, 10100 + 16, "ALPHA", wxDefaultPosition, wxDefaultSize, 0);
+    b->Connect(wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(cMain::OnSelectColour), nullptr);
     m_ToolBar->AddControl(b); 
 
     m_ToolBar->Realize();

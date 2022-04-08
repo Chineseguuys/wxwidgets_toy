@@ -3,17 +3,27 @@
 #include "base_change.h"
 #include "frame.h"
 
+#include "exchange.xpm"
+
 extern "C" {
+/**
+ * from https://github.com/rxi/log.c
+ * modified some source code
+ * have been compiled to system path
+ */
 #include <simplelogs.h>
 };
 
-#define MAX_STRING_LENGTH 32
+// 允许输入的字符串的长度
+#define MAX_STRING_LENGTH 64
+#define BINARY_MAX_STRING_LENGTH 512
 
 BEGIN_EVENT_TABLE(MyFrame, wxFrame)
 END_EVENT_TABLE()
 
 MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) :
     wxFrame(nullptr, FRAME_ID_ONE, title, pos, size) {
+    SetIcon(wxIcon(b2d1de224efa47869e5b8994132f6b63Q4F3Zi9s7jt0hWh6));
     wxBoxSizer *h_box = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *v_box_10b = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer *v_box_2b = new wxBoxSizer(wxHORIZONTAL);
@@ -21,19 +31,19 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
     wxBoxSizer *v_box_8b = new wxBoxSizer(wxHORIZONTAL);
 
     wxStaticText *base10_txt = new wxStaticText(this, wxID_ANY, wxT("10 进制:"));
-    wxTextCtrl *  base10_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE10, wxT(""));
+    wxTextCtrl   *base10_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE10, wxT(""));
     base10_input->Bind(wxEVT_TEXT, &MyFrame::deal_with_10base, this);
 
     wxStaticText *base2_txt = new wxStaticText(this, wxID_ANY, wxT("2  进制:"));
-    wxTextCtrl *  base2_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE2, wxT(""));
+    wxTextCtrl   *base2_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE2, wxT(""));
     base2_input->Bind(wxEVT_TEXT, &MyFrame::deal_with_2base, this);
 
     wxStaticText *base8_txt = new wxStaticText(this, wxID_ANY, wxT("8  进制:"));
-    wxTextCtrl *  base8_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE8, wxT(""));
+    wxTextCtrl   *base8_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE8, wxT(""));
     base8_input->Bind(wxEVT_TEXT, &MyFrame::deal_with_8base, this);
 
     wxStaticText *base16_txt = new wxStaticText(this, wxID_ANY, wxT("16 进制:"));
-    wxTextCtrl *  base16_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE16, wxT(""));
+    wxTextCtrl   *base16_input = new wxTextCtrl(this, TEXT_CTRL_ID_BASE16, wxT(""));
     base16_input->Bind(wxEVT_TEXT, &MyFrame::deal_with_16base, this);
 
     //
@@ -100,8 +110,8 @@ void MyFrame::deal_with_10base(wxCommandEvent &evt) {
 void MyFrame::deal_with_2base(wxCommandEvent &evt) {
     if (this->text_ctrl_refs[0]->HasFocus()) {
         int string_len = this->text_ctrl_refs[0]->GetLineLength(0);
-        if (string_len >= MAX_STRING_LENGTH * 4) {
-            log_error("string is too long, delete some");
+        if (string_len >= BINARY_MAX_STRING_LENGTH) {
+            log_error("string is too long[%d], please delete some chars", string_len);
             this->text_ctrl_refs[0]->SetBackgroundColour(wxColour(200, 100, 100));
             return;
         }

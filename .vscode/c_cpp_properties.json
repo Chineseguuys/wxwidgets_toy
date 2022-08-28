@@ -4,13 +4,13 @@
             "name": "Linux",
             "includePath": [
                 "${default}",
-                "${workspaceFolder}/office_tutorials/sizer",
-                "/usr/local/include/wx-3.1",
-                "/usr/local/lib/wx/include/gtk3-unicode-3.1"
+                "${workspaceFolder}/customControls",
+                "/usr/local/include/wx-3.2",
+                "/usr/local/lib/wx/include/x11univ-unicode-3.2"
             ],
             "defines": [],
-            "compilerPath": "/usr/local/bin/clang",
-            "compileCommands": "${workspaceFolder}/desktop_progm_4/build/compile_commands.json"
+            "compilerPath": "/usr/bin/clang-14",
+            "compileCommands": "${workspaceFolder}/chartControls/build/compile_commands.json"
         }
     ],
     "version": 4

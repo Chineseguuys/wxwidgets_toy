@@ -7,18 +7,28 @@ set (CMAKE_C_COMPILER "clang")
 set (CMAKE_CXX_COMPILER "clang++")
 set (CMAKE_VERBOSE_MAKEFILE ON)
 
-find_package(wxwidget REQUIRED)
+#find_package(wxwidget REQUIRED)
 
-if (wxwidget_FOUND)
-    message("find wxwidget")
-    message("wxwidget include dir : ${WXWIDGET_INCLUDE_DIRS}")
-    message("wxwidget library dir : ${WXWIDGET_LIBRARY_DIRS}")
-endif()
+#if (wxwidget_FOUND)
+#    message("find wxwidget")
+#    message("wxwidget include dir : ${WXWIDGET_INCLUDE_DIRS}")
+#    message("wxwidget library dir : ${WXWIDGET_LIBRARY_DIRS}")
+#endif()
+
+# 在不同的电脑主机上，安装目录的位置有所不同。以实际情况为准
+# 下面的安装位置是编译安装的默认位置 
+set (WX_INCLUDE_DIR "/usr/local/include/wx-3.1")
+set (WX_LIBRARY_DIR "/usr/local/lib")
 
 # 通过执行 wx-config --cxxflags 获得
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_LIBRARY_DIR}/wx/include/gtk3-unicode-3.1")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_INCLUDE_DIR}")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread -g")
+
+# 通过执行 wx-config --cxxflags 获得
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/lib/wx/include/gtk3-unicode-static-3.1")
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/home/yjh/MYSOFTWARE/wxwidgets_3_1_4/include/wx-3.1")
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -D__WXGTK__ -pthread")
 
 add_library(delete_line STATIC
     src/delete_line.cpp
@@ -42,7 +52,7 @@ target_include_directories( ${PROJECT_NAME}
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}/icon
-        ${WXWIDGET_INCLUDE_DIRS}
+        ${WX_INCLUDE_DIR}
 )
 
 # 需要为 wx widgets 准备的所有的链接库文件
@@ -53,17 +63,13 @@ target_include_directories( ${PROJECT_NAME}
 # 需要的库通过 wx-config --libs 获得
 target_link_libraries( ${PROJECT_NAME}
     delete_line
-    ${WXWIDGET_LIBRARY_DIRS}/libwx_gtk3u_xrc-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwx_gtk3u_qa-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwx_baseu_net-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwx_gtk3u_html-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwx_gtk3u_core-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwx_baseu_xml-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwx_baseu-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwxtiff-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwxjpeg-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwxregexu-3.1.a
-    ${WXWIDGET_LIBRARY_DIRS}/libwxscintilla-3.1.a
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_xrc-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_html-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_qa-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_gtk3u_core-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_baseu_xml-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_baseu_net-3.1.so
+    ${WX_LIBRARY_DIR}/libwx_baseu-3.1.so
     gthread-2.0
     X11
     SM
@@ -74,19 +80,24 @@ target_link_libraries( ${PROJECT_NAME}
     cairo-gobject
     cairo
     gdk_pixbuf-2.0
-    Xtst 
-    pangoft2-1.0 
-    pango-1.0 
-    harfbuzz 
-    fontconfig 
-    freetype  
-    expat 
-    png 
-    z 
-    dl 
-    secret-1 
-    gio-2.0 
-    gobject-2.0 
-    glib-2.0 
+    Xtst
+    pangoft2-1.0
+    pango-1.0
+    harfbuzz
+    fontconfig
+    freetype
+    expat
+    png
+    z
+    dl
+    secret-1
+    gio-2.0
+    gobject-2.0
+    glib-2.0
     m
+# if using llvm c++ lib, should do
+    c++
+    c++abi
+# if using self defined logs added this dynamic link library
+    simplelogs
 )

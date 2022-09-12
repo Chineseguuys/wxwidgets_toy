@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(chartControls)
+project(IdelEvents)
 
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set (CMAKE_C_COMPILER clang-14)
@@ -23,8 +23,6 @@ add_definitions(-w) # 禁止编译器的警告输出
 set (SOURCES
     src/main.cpp
     src/MyFrame.cpp
-    src/drawingcanvas.cpp
-    src/chartControl.cpp
 )
 
 add_executable( ${PROJECT_NAME}

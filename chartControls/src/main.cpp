@@ -11,7 +11,7 @@ wxIMPLEMENT_APP(MyApp);
 
 
 bool MyApp::OnInit() {
-    MyFrame* frame = new MyFrame("X11", wxPoint(50, 50), wxDefaultSize);
+    MyFrame* frame = new MyFrame("WITH-GTK", wxPoint(50, 50), wxDefaultSize);
     frame->Show();
 
     return true;

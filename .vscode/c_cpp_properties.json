@@ -10,7 +10,7 @@
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang-14",
-            "compileCommands": "${workspaceFolder}/wxYield_II/build/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/shareData_btThread/build/compile_commands.json"
         }
     ],
     "version": 4

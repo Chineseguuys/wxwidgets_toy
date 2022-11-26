@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.16.3)
 
-project(wx_widgets)
+project(shareData)
 
 set (CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set (CMAKE_C_COMPILER clang-14)
 set (CMAKE_CXX_COMPILER clang++-14)
 set (CMAKE_VERBOSE_MAKEFILE ON)
+set (CMAKE_BUILD_TYPE "Release")
 
 # 在不同的电脑主机上，安装目录的位置有所不同。以实际情况为准
 # 下面的安装位置是编译安装的默认位置
@@ -16,13 +17,21 @@ set (WX_LIBRARY_DIR "/usr/local/lib")
 # -I/usr/local/lib/wx/include/gtk3-unicode-3.2 -I/usr/local/include/wx-3.2 -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXGTK__
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_LIBRARY_DIR}/wx/include/gtk3-unicode-3.2")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${WX_INCLUDE_DIR}")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXGTK__ -pthread -g")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D_FILE_OFFSET_BITS=64 -DWXUSINGDLL -D__WXGTK__ -pthread")
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    message("debug mode set")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+    add_definitions(-DDEBUG_COMPILER)
+endif()
+
+add_definitions(-w) # 禁止编译器的警告输出
 
 set (SOURCES
     src/main.cpp
-    src/base_change.cpp
-    src/app.cpp
+    src/MyFrame.cpp
     src/logs.c
+    src/visualGrid.cpp
 )
 
 add_executable( ${PROJECT_NAME}
@@ -32,9 +41,9 @@ add_executable( ${PROJECT_NAME}
 target_include_directories( ${PROJECT_NAME}
     PUBLIC
         ${WX_INCLUDE_DIR}
-        ${PROJECT_SOURCE_DIR}/include 
-        ${PROJECT_SOURCE_DIR}/icons
+        ${PROJECT_SOURCE_DIR}/include
 )
+
 
 # 需要为 wx widgets 准备的所有的链接库文件
 # 为什么不使用 set (CMAKE_LINKER_FALGS "XXX") 而使用下面的这个函数：
@@ -42,6 +51,8 @@ target_include_directories( ${PROJECT_NAME}
 # ld 在进行链接的时候，无法找到相应的库文件(这是一个 bug，linux 下存在这个问题)
 
 # 需要的库通过 wx-config --libs 获得
+# 这里重新编译了 wxwidget 库，从使用 gtk 改为了使用x11,所以下面的 config 结果发生了变化
+# 基于 gtk 编译的 wxwidgets bug 就要少了很多
 target_link_libraries( ${PROJECT_NAME}
     ${WX_LIBRARY_DIR}/libwx_gtk3u_xrc-3.2.so
     ${WX_LIBRARY_DIR}/libwx_gtk3u_html-3.2.so
@@ -50,4 +61,5 @@ target_link_libraries( ${PROJECT_NAME}
     ${WX_LIBRARY_DIR}/libwx_baseu_xml-3.2.so 
     ${WX_LIBRARY_DIR}/libwx_baseu_net-3.2.so 
     ${WX_LIBRARY_DIR}/libwx_baseu-3.2.so
+    # pthread
 )

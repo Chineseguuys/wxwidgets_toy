@@ -56,7 +56,8 @@ void MyFrame::OnIdel(wxIdleEvent& evt) {
         if (this->sortOp->finished()) {
             std::chrono::steady_clock::time_point endTime = std::chrono::steady_clock::now();
             auto diff = endTime - this->startTime;
-            this->label->SetLabelText(wxString::Format("The first number is %d.\nProcessing time: %.2f[ms]", this->sortOp->mArr[0], std::chrono::duration<double, std::milli>(diff).count()));
+            this->label->SetLabelText(wxString::Format("The first number is %d.\nProcessing time: %.2f[ms]", this->sortOp->mArr[0], 
+                std::chrono::duration<double, std::milli>(diff).count()));
             this->Layout();
 
             this->Unbind(wxEVT_IDLE, &MyFrame::OnIdle, this);

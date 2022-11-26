@@ -11,7 +11,7 @@ extern "C" {
  * modified some source code
  * have been compiled to system path
  */
-#include <simplelogs.h>
+#include "logs.h"
 };
 
 // 允许输入的字符串的长度
